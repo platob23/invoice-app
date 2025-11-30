@@ -5,37 +5,42 @@ import {
     SidebarFooter,
     SidebarGroup, SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator
+    SidebarHeader, SidebarMenu,
+    SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton,
+    SidebarMenuSubItem, SidebarSeparator
 } from "@/components/ui/sidebar";
-import {ChevronUp, Euro, Home, Search, Settings, User2, Users} from "lucide-react";
+import {
+    ChevronUp, Code,
+    Euro,
+    Home, LayoutDashboardIcon, Paperclip,
+    PiggyBank,
+    Plus,
+    Projector,
+    ScrollText,
+    Search,
+    Settings, ShoppingBasket,
+    User2,
+    Users
+} from "lucide-react";
 import Link from "next/link";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 const items = [
     {
-        title: "Home",
-        url: "#",
-        icon: <Home/>,
+        title: "Dashboard",
+        url: "http://localhost:3000/",
+        icon: <LayoutDashboardIcon/>,
     },
     {
         title: "Customers",
-        url: "#",
+        url: "http://localhost:3000/customers",
         icon: <Users/>,
     },
     {
-        title: "Invoices",
-        url: "#",
-        icon: <Euro/>,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: <Search/>,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: <Settings/>,
+        title: "Products",
+        url: "http://localhost:3000/products",
+        icon: <ShoppingBasket/>,
     },
 ]
 
@@ -47,19 +52,17 @@ function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link href={"/"}>
-                                <p>(img)</p>
+                                <Image src={"/invoice-image.png"} alt={"logo"} width={20} height={20} />
                                 <span>Bytex Invoice Portal</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-
             <SidebarSeparator/>
-
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Label</SidebarGroupLabel>
+                    <SidebarGroupLabel>Allgemein</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map(item => (
@@ -74,9 +77,49 @@ function AppSidebar() {
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>
-                    </SidebarGroupContent>
+                        <SidebarSeparator/>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link href="/#">
+                                        <Projector />
+                                         Invoices
+                                    </Link>
+                                </SidebarMenuButton>
+                                <SidebarMenuSub>
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild>
+                                            <Link href="/#">
+                                                <Paperclip />
+                                                All Invoices
+                                            </Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
 
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild>
+                                            <Link href="/#">
+                                                <Plus />
+                                                Create new Invoice
+                                            </Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild>
+                                            <Link href="/#">
+                                                <Code />
+                                                Show logs
+                                            </Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                </SidebarMenuSub>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+
+                    </SidebarGroupContent>
                 </SidebarGroup>
+
+
             </SidebarContent>
             <SidebarFooter>
                 <SidebarMenu>
@@ -90,7 +133,7 @@ function AppSidebar() {
                             <DropdownMenuContent align="end">
                                 <DropdownMenuItem>Account</DropdownMenuItem>
                                 <DropdownMenuItem>Settings</DropdownMenuItem>
-                                <DropdownMenuItem>Sign out</DropdownMenuItem>
+                                <DropdownMenuItem variant={"destructive"}>Sign out</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </SidebarMenuItem>
